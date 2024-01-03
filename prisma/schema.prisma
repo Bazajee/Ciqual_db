@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+
+model Nutrient {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  Nutdata Nutdata[]
+}
+
+model Grp {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  Food Food[]
+}
+
+model Food {
+  id     Int    @id @default(autoincrement())
+  name   String 
+  grp    Grp    @relation(fields: [grp_id], references: [id])
+  grp_id Int    @unique
+
+  Nutdata Nutdata[]
+}
+
+model Nutdata {
+    id  Int     @id @default(autoincrement())
+
+    food Food   @relation(fields: [food_id], references: [id])
+    food_id Int
+
+    nutrient Nutrient @relation(fields: [nutrient_id], references: [id])
+    nutrient_id Int 
+
+    value String
+}
+
