@@ -17,5 +17,7 @@ Migrate the schema.prisma : ```npx prisma migrate dev```
 
 ## Create a script 
 
+Use prisma function for initialiase the db.
+
 
 
